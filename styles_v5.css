@@ -1,0 +1,133 @@
+/* DESTINY — youth / retro-web inspired stylesheet */
+@font-face{
+  font-family:'KIMWILDgag-Bold';
+  src:url('https://cdn.jsdelivr.net/gh/woffz/b3@main/KIMWILDgag-Bold/KIMWILDgag-Bold.woff2') format('woff2');
+  font-weight:400;
+  font-style:normal;
+  font-display:swap;
+}
+:root{
+  --mint:#ecfdfb;
+  --sky:#edf4fc;
+  --pale:#c5daf6;
+  --blue:#3b35fc;
+  --ink:#171717;
+  --gray:#858b93;
+  --paper:#ffffff;
+  --line:#aab2bd;
+  --shadow:5px 5px 0 rgba(59,53,252,.12);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"KIMWILDgag-Bold",sans-serif;overflow-x:hidden}
+button,a{font:inherit}
+button{cursor:pointer}
+.entry-screen{min-height:100vh;background:#fff;display:grid;place-items:center;position:relative;padding:28px}
+.entry-frame{width:min(1100px,96vw);height:min(790px,88vh);min-height:620px;position:relative;border:1px solid #222;background:#fff;overflow:hidden;box-shadow:12px 12px 0 var(--mint)}
+.entry-sign{position:absolute;z-index:8;top:18px;left:50%;transform:translateX(-50%);width:min(820px,80%);background:#fff;border:1px solid #111;text-align:center;padding:9px 16px 12px;line-height:1}
+.destiny-blue{display:block;color:var(--blue);font-family:"Bowlby One SC",sans-serif;font-size:clamp(2.6rem,6vw,5rem);letter-spacing:.04em}
+.sign-sub{display:block;font-family:"KIMWILDgag-Bold",sans-serif;font-size:clamp(1rem,2.1vw,1.65rem);margin-top:7px}
+.room-backdrop{position:absolute;inset:0;background:linear-gradient(var(--sky) 0 67%,#fff 67%);overflow:hidden}
+.floor-line{position:absolute;left:0;right:0;bottom:13%;border-top:1px dashed #777}
+.amp{position:absolute;background:#ddd;border:2px solid #222;width:110px;height:95px;bottom:15%;box-shadow:inset 0 0 0 8px #eee}
+.amp-a{left:10%}.amp-b{right:10%}
+.amp:after{content:"";position:absolute;left:14px;right:14px;top:14px;height:36px;border:1px dotted #555}
+.instrument{position:absolute;filter:grayscale(1);opacity:.72}
+.instrument-drum{left:12%;bottom:22%;width:190px;height:180px;border:8px solid #222;border-radius:50%;background:radial-gradient(circle,#fff 0 35%,#ccc 36% 39%,#fff 40%);transform:rotate(-8deg)}
+.instrument-drum span,.instrument-drum i,.instrument-drum b{position:absolute;display:block;background:#222}
+.instrument-drum span{width:8px;height:160px;left:88px;top:7px}.instrument-drum i{height:8px;width:170px;top:84px;left:2px}.instrument-drum b{width:10px;height:85px;left:35px;top:-55px;transform:rotate(-35deg)}
+.instrument-guitar{right:12%;bottom:18%;width:135px;height:290px;transform:rotate(20deg)}
+.instrument-guitar:before{content:"";position:absolute;left:45px;top:25px;width:70px;height:220px;border-radius:48% 48% 35% 35%;background:#222}
+.instrument-guitar span{position:absolute;left:68px;top:0;width:24px;height:115px;background:#222}.instrument-guitar i{position:absolute;left:78px;top:115px;width:5px;height:160px;background:#222}
+.instrument-bass{left:31%;bottom:14%;width:80px;height:310px;transform:rotate(-13deg)}
+.instrument-bass:before{content:"";position:absolute;left:20px;bottom:0;width:42px;height:130px;border-radius:50%;background:#222}
+.instrument-bass span{position:absolute;left:30px;top:0;width:22px;height:230px;background:#222}.instrument-bass i{position:absolute;left:39px;top:0;width:2px;height:290px;background:#777}
+.instrument-mic{right:31%;bottom:14%;width:120px;height:300px}
+.instrument-mic:before{content:"";position:absolute;left:48px;top:0;width:38px;height:65px;border-radius:50%;border:6px solid #222;background:#ddd}
+.instrument-mic i{position:absolute;left:65px;top:60px;width:5px;height:190px;background:#222}.instrument-mic b{position:absolute;left:18px;bottom:0;width:95px;height:4px;background:#222;transform:rotate(-7deg)}
+.gate{position:absolute;z-index:6;inset:0;display:flex;transition:transform 1.2s cubic-bezier(.7,0,.2,1)}
+.gate-panel{height:100%;width:50%;background:repeating-linear-gradient(90deg,#d9f4f5 0 24px,#c5daf6 24px 30px);border-bottom:1px solid #222;position:relative}
+.gate-panel:before,.gate-panel:after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent 0 22px,rgba(59,53,252,.55) 23px 26px,transparent 27px 45px);opacity:.9}
+.gate-panel:after{transform:scaleX(-1)}
+.left-panel{border-right:1px solid #222}.right-panel{border-left:1px solid #222}
+.gate-center{position:absolute;left:50%;top:0;bottom:0;width:6px;background:#3b35fc;transform:translateX(-50%);z-index:2}
+.lock-button{position:absolute;z-index:5;left:50%;top:51%;transform:translate(-50%,-50%);border:1px solid #111;background:#fff;color:#111;padding:10px 14px;box-shadow:4px 4px 0 var(--blue);display:flex;gap:9px;align-items:center;font-size:11px}
+.lock-icon{color:var(--blue);font-size:12px}
+.gate.open .left-panel{transform:translateX(-102%);transition:transform 1.2s cubic-bezier(.7,0,.2,1)}
+.gate.open .right-panel{transform:translateX(102%);transition:transform 1.2s cubic-bezier(.7,0,.2,1)}
+.gate.open .lock-button,.gate.open .gate-center{opacity:0;pointer-events:none;transition:.25s}
+.join-button{position:absolute;z-index:9;left:50%;top:51%;transform:translate(-50%,-50%) scale(.9);opacity:0;pointer-events:none;background:var(--blue);color:#fff;border:2px solid #111;padding:14px 22px 16px;text-align:center;line-height:.9;box-shadow:7px 7px 0 #111;font-family:"Silkscreen",monospace;transition:.4s}
+.join-button strong{display:block;font-size:11px;margin-bottom:9px}.join-button span{display:block;font-size:23px;letter-spacing:.08em}
+.join-button.ready{opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1);animation:blink .85s steps(2,end) infinite}
+@keyframes blink{50%{opacity:.28}}
+.entry-hint{font-size:10px;position:absolute;bottom:10px;left:50%;transform:translateX(-50%);letter-spacing:.08em;color:#777}
+.site{display:none;min-height:100vh;background:var(--sky)}
+.site.visible{display:block;animation:siteIn .8s ease both}
+@keyframes siteIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.topbar{height:29px;background:var(--blue);color:#fff;border-bottom:1px solid #111;display:grid;grid-template-columns:repeat(4,1fr);font-size:10px;align-items:center;text-align:center;letter-spacing:.08em}
+.site-shell{width:min(1160px,95vw);margin:22px auto;display:grid;grid-template-columns:190px 1fr;gap:18px}
+.sidebar{border:1px solid #888;background:#fff;padding:14px 12px;height:max-content;position:sticky;top:15px;box-shadow:var(--shadow)}
+.mini-logo{font-family:"Bowlby One SC";font-size:24px;color:var(--blue);letter-spacing:.04em;border-bottom:1px dotted #777;padding-bottom:11px;margin-bottom:14px}.mini-logo span{color:#111}
+.sidebar-label{font-family:"KIMWILDgag-Bold",sans-serif;font-size:20px;margin-bottom:8px}
+nav{display:flex;flex-direction:column;gap:6px}nav a{color:#222;text-decoration:none;font-size:11px;padding:3px 4px}nav a:hover,nav a.active{background:var(--blue);color:#fff}
+.sidebar-sticker{font-size:27px;color:var(--blue);letter-spacing:4px;margin:22px 0;text-align:center}
+.visitor-box{border-top:1px dotted #777;padding-top:10px;text-align:center;font-size:8px;color:#777}.visitor-box span{font-size:12px;color:#111}
+.content{min-width:0}
+.hero-title{border:1px solid #111;background:#fff;padding:7px 10px 2px;display:flex;justify-content:center;gap:0;box-shadow:var(--shadow);margin-bottom:18px}
+.hero-title span{font-family:"Bowlby One SC";font-size:clamp(2.2rem,6vw,5.2rem);line-height:1;color:var(--blue);-webkit-text-stroke:1px #111}
+.hero-title span:nth-child(2),.hero-title span:nth-child(5){color:#fff}.hero-title span:nth-child(3),.hero-title span:nth-child(7){color:var(--mint)}.hero-title span:nth-child(4),.hero-title span:nth-child(6){color:var(--pale)}
+.page-section{margin-bottom:28px;scroll-margin-top:20px}
+.welcome-card,.youth-copy,.ruled-paper,.member-card,.archive-list,.setlist-paper,.goods-photo,.link-cards{border:1px solid #999;background:#fff}
+.welcome-card{padding:22px;position:relative;background:linear-gradient(135deg,#fff 0 55%,var(--mint) 55%)}
+.pixel-label,.section-tag,.paper-label{font-family:"Silkscreen";font-size:10px;color:#fff;background:var(--blue);display:inline-block;padding:6px 8px}
+.welcome-card h1{font-family:"Bowlby One SC";font-size:clamp(2.3rem,6vw,4.5rem);margin:16px 0 8px;color:var(--blue);-webkit-text-stroke:1px #111}
+.welcome-card p{max-width:700px;font-family:"KIMWILDgag-Bold",sans-serif;font-size:15px;line-height:1.75}.lead{font-size:18px!important}.tiny-note{font:10px "DM Mono"!important;color:#777}
+.youth-copy{margin-top:16px;padding:22px;background:var(--sky)}
+.youth-copy h2{font-family:"KIMWILDgag-Bold",sans-serif;font-size:clamp(1.7rem,4vw,3rem);line-height:1.18;margin:14px 0}
+.youth-copy p{font-family:"KIMWILDgag-Bold",sans-serif;line-height:1.8;max-width:800px}.signature{text-align:right;color:var(--blue);font-size:11px}
+.collage-grid{margin-top:18px;display:grid;grid-template-columns:1.1fr 1fr 1fr;grid-auto-rows:180px;gap:9px}
+.photo-placeholder{border:1px solid #777;background:repeating-linear-gradient(45deg,#fff 0 10px,var(--mint) 10px 20px);display:grid;place-items:center;align-content:center;text-align:center;color:#555}.photo-placeholder span{font-family:"Silkscreen";font-size:17px}.photo-placeholder small{font-size:9px;margin-top:8px}.photo-placeholder.tall{grid-row:span 2}.photo-placeholder.wide{grid-column:2 / span 2}
+.section-heading{display:flex;align-items:baseline;gap:10px;margin-bottom:10px;border-bottom:1px solid #111;padding-bottom:7px}.section-heading span{color:var(--blue);font-size:10px}.section-heading h2{font-family:"Bowlby One SC";font-size:25px;margin:0}
+.ruled-paper{padding:22px;background:repeating-linear-gradient(to bottom,#fff 0 31px,#d9e2ee 32px)}
+.placeholder-copy{font-family:"Silkscreen";color:var(--blue)}.ruled-paper p{font-family:"KIMWILDgag-Bold",sans-serif;line-height:1.8;max-width:800px}
+.blank-lines{height:130px;margin-top:18px;background:repeating-linear-gradient(to bottom,transparent 0 29px,#aeb9c6 30px 31px)}
+.member-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.member-card{padding:16px;background:var(--mint);box-shadow:3px 3px 0 #111}.member-card:nth-child(even){background:var(--sky)}.member-card h3{font-family:"Silkscreen";font-size:12px;color:var(--blue);border-bottom:1px solid #111;padding-bottom:8px}.member-card p{font-family:"KIMWILDgag-Bold",sans-serif;margin:9px 0}.member-photo-space{margin-top:12px;border:1px dashed #777;min-height:180px;display:grid;place-items:center;font-size:10px;color:#777;background:#fff}
+.archive-list{padding:4px}.archive-list article{display:grid;grid-template-columns:130px 1fr;gap:18px;padding:18px 15px;border-bottom:1px dotted #888}.archive-list article:last-child{border-bottom:0}.archive-date{font-family:"Silkscreen";font-size:10px;color:var(--blue)}.archive-list h3{font-family:"KIMWILDgag-Bold",sans-serif;margin:0 0 7px;font-size:20px}.archive-list p{margin:0 0 10px;font-size:10px;color:#666}.archive-link{font-size:9px;color:#111;text-decoration:underline}
+.goods-layout{display:grid;grid-template-columns:1fr 1fr;gap:12px}.setlist-paper{padding:22px;background:var(--mint)}.setlist-paper>p{font-family:"Silkscreen";font-size:16px;color:var(--blue)}.goods-photo{min-height:330px;display:grid;place-items:center;text-align:center;background:var(--pale);font-family:"Silkscreen";color:#111}
+.link-cards{display:grid;grid-template-columns:1fr 1fr}.link-cards a{padding:25px;text-decoration:none;color:#111;font-family:"Silkscreen";font-size:18px;border-right:1px solid #111}.link-cards a:last-child{border-right:0}.link-cards a:hover{background:var(--blue);color:#fff}.link-cards span{float:right}.link-note{font-size:9px;color:#777}
+footer{display:flex;justify-content:space-between;border-top:1px solid #111;padding:13px 0 40px;font-size:9px;color:#666}
+.note{position:fixed;z-index:1000;pointer-events:none;font-size:25px;color:var(--blue);animation:noteFall 1.35s cubic-bezier(.2,.55,.35,1) forwards;transform:translate(-50%,-50%) rotate(0deg)}
+.note:nth-child(2n){color:#111}.note:nth-child(3n){color:#7aa8dc}
+@keyframes noteFall{0%{transform:translate(-50%,-50%) rotate(0deg);opacity:1}70%{opacity:.95}100%{transform:translate(calc(-50% + var(--drift)), calc(100vh - var(--start-y))) rotate(260deg);opacity:0}}
+@media(max-width:800px){
+  .entry-frame{min-height:570px;height:80vh}.entry-sign{width:92%}.sign-sub{font-size:12px}
+  .instrument-drum{left:2%;transform:scale(.75) rotate(-8deg)}.instrument-bass{left:20%;transform:scale(.7) rotate(-13deg)}.instrument-mic{right:18%;transform:scale(.75)}.instrument-guitar{right:1%;transform:scale(.72) rotate(20deg)}
+  .site-shell{grid-template-columns:1fr}.sidebar{position:relative;top:0}.sidebar nav{display:grid;grid-template-columns:repeat(2,1fr)}
+  .member-grid{grid-template-columns:repeat(2,1fr)}.collage-grid{grid-template-columns:1fr 1fr}.photo-placeholder.tall{grid-row:span 1}.photo-placeholder.wide{grid-column:1 / span 2}
+  .goods-layout{grid-template-columns:1fr}.topbar{font-size:8px}
+}
+@media(max-width:500px){
+  .entry-screen{padding:10px}.entry-frame{width:100%;height:82vh;min-height:500px}.entry-hint{display:none}
+  .lock-button{font-size:9px}.join-button span{font-size:18px}.hero-title span{font-size:2rem}.archive-list article{grid-template-columns:1fr;gap:5px}
+  .member-grid{grid-template-columns:1fr}.link-cards{grid-template-columns:1fr}.link-cards a{border-right:0;border-bottom:1px solid #111}.link-cards a:last-child{border-bottom:0}
+}
+
+/* The Korean display font is used throughout; compact UI labels stay monospaced for contrast. */
+.lock-button,.entry-hint,.topbar,.visitor-box,.sidebar nav a,.sidebar-sticker,.pixel-label,.section-tag,.paper-label,.archive-date,.archive-link,.link-note,footer,.tiny-note,.join-button,.note{font-family:"DM Mono",monospace}
+/* Navigation is page-based: scrolling never reveals another section. */
+.page-section{display:none;min-height:calc(100vh - 130px);margin-bottom:28px;scroll-margin-top:20px}
+.page-section.page-active{display:block;animation:pageIn .42s ease both}
+@keyframes pageIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* Korean type: Wildgag is the default for all Korean-containing content. */
+body, button, input, textarea, select,
+.entry-sign, .sign-sub,
+.welcome-card, .welcome-card h1, .welcome-card p,
+.youth-copy, .youth-copy h2, .youth-copy p,
+.ruled-paper, .ruled-paper p,
+.member-card, .member-card p,
+.archive-list, .archive-list h3,
+.setlist-paper, .goods-photo,
+.link-note {
+  font-family:"KIMWILDgag-Bold", sans-serif;
+}

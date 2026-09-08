@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DESTINY — Sookmyung W. Univ. Rock Band</title>
+  <meta name="description" content="DESTINY — Sookmyung W. Univ. Rock Band">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bowlby+One+SC&family=DM+Mono:wght@400;500&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles_v5.css">
+</head>
+<body>
+  <div id="notes-layer" aria-hidden="true"></div>
+
+  <!-- ENTRY -->
+  <section id="entry" class="entry-screen">
+    <div class="entry-frame">
+      <div class="entry-sign">
+        <span class="destiny-blue">DESTINY</span>
+        <span class="sign-sub">Sookmyung W. Univ. Rock Band</span>
+      </div>
+
+      <div class="room-backdrop" aria-hidden="true">
+        <div class="instrument instrument-drum"><span></span><i></i><b></b></div>
+        <div class="instrument instrument-guitar"><span></span><i></i></div>
+        <div class="instrument instrument-mic"><span></span><i></i><b></b></div>
+        <div class="instrument instrument-bass"><span></span><i></i></div>
+        <div class="amp amp-a"></div>
+        <div class="amp amp-b"></div>
+        <div class="floor-line"></div>
+      </div>
+
+      <div class="gate" id="gate">
+        <div class="gate-panel left-panel"></div>
+        <div class="gate-panel right-panel"></div>
+        <div class="gate-center"></div>
+        <button class="lock-button" id="unlockBtn" type="button" aria-label="문 열기">
+          <span class="lock-icon">●</span>
+          <span>CLICK TO UNLOCK</span>
+        </button>
+      </div>
+
+      <button id="joinButton" class="join-button" type="button">
+        <strong>22/23</strong>
+        <span>COME</span>
+        <span>JOIN</span>
+        <span>US!</span>
+      </button>
+    </div>
+    <p class="entry-hint">a little door to our youth · click the lock</p>
+  </section>
+
+  <!-- SITE -->
+  <main id="site" class="site" aria-hidden="true">
+    <header class="topbar">
+      <div class="topbar-item">DESTINY</div>
+      <div class="topbar-item">Sookmyung W. Univ.</div>
+      <div class="topbar-item">★ ROCK BAND ★</div>
+      <div class="topbar-item">2026</div>
+    </header>
+
+    <div class="site-shell">
+      <aside class="sidebar">
+        <div class="mini-logo">DESTINY<span>!</span></div>
+        <div class="sidebar-label">Navigation</div>
+        <nav>
+          <a href="#home" class="nav-link active">- Home</a>
+          <a href="#about" class="nav-link">- About DESTINY</a>
+          <a href="#member" class="nav-link">- Member</a>
+          <a href="#archive" class="nav-link">- Archive</a>
+          <a href="#goods" class="nav-link">- Setlist &amp; Goods</a>
+          <a href="#links" class="nav-link">- Links</a>
+        </nav>
+        <div class="sidebar-sticker">♪ ♫ ♪</div>
+        <div class="visitor-box">YOU ARE VISITOR<br><span id="visitorNumber">000023</span></div>
+      </aside>
+
+      <div class="content">
+        <div class="hero-title">
+          <span>D</span><span>E</span><span>S</span><span>T</span><span>I</span><span>N</span><span>Y</span>
+        </div>
+
+        <section id="home" class="page-section home-section page-active">
+          <div class="welcome-card">
+            <div class="pixel-label">WELCOME!</div>
+            <h1>WELCOME!</h1>
+            <p class="lead">여름처럼 반짝이고, 조금 서툴렀던 우리들의 순간들.</p>
+            <p>
+              이곳은 숙명여자대학교 중앙 록밴드 <b>DESTINY</b>의 작은 아카이브입니다.
+              공연과 음악, 그리고 아직 이름 붙이지 못한 청춘의 장면들을 천천히 모아두었습니다.
+            </p>
+            <p class="tiny-note">* 아래의 문구와 사진은 나중에 자유롭게 교체할 수 있도록 비워두었어요.</p>
+          </div>
+
+          <div class="youth-copy">
+            <div class="section-tag">A NOTE ON YOUTH</div>
+            <h2>청춘은 완성되는 것이 아니라<br>계속 연주되는 것.</h2>
+            <p>
+              어떤 날은 소리가 너무 크고, 어떤 날은 아무것도 들리지 않는다.
+              그래도 우리는 다시 앰프를 켜고, 기타를 들고, 서로의 박자를 기다린다.
+              아마 청춘이란 그런 것인지도 모른다.
+            </p>
+            <p>
+              지나고 나서야 이름을 붙일 수 있는 순간들.
+              실패한 공연도, 늦은 밤의 합주도, 이유 없이 웃었던 장면도
+              결국 한 곡의 일부가 된다.
+            </p>
+            <div class="signature">— DESTINY, 2026</div>
+          </div>
+
+          <div class="collage-grid">
+            <div class="photo-placeholder tall"><span>PHOTO 01</span><small>DESTINY LOGO / PHOTO</small></div>
+            <div class="photo-placeholder"><span>PHOTO 02</span><small>YOUTH / MOOD IMAGE</small></div>
+            <div class="photo-placeholder"><span>PHOTO 03</span><small>LIVE / BAND PHOTO</small></div>
+            <div class="photo-placeholder wide"><span>PHOTO 04</span><small>YOUR IMAGE HERE</small></div>
+          </div>
+        </section>
+
+        <section id="about" class="page-section">
+          <div class="section-heading"><span>02</span><h2>ABOUT DESTINY</h2></div>
+          <div class="ruled-paper">
+            <p class="placeholder-copy">여기에 DESTINY 소개를 넣어주세요.</p>
+            <p>숙명여자대학교 중앙 록밴드 DESTINY. 우리의 음악, 활동 방식, 동아리의 분위기와 이야기를 자유롭게 채울 수 있는 공간입니다.</p>
+            <div class="blank-lines"></div>
+          </div>
+        </section>
+
+        <section id="member" class="page-section">
+          <div class="section-heading"><span>03</span><h2>MEMBER</h2></div>
+          <div class="member-grid">
+            <div class="member-card"><h3>VOCAL</h3><p>오수민</p><p>이지원</p><p>조예원</p></div>
+            <div class="member-card"><h3>GUITAR</h3><p>안유진</p><p>오현서</p><p>이하진</p><p>정은서</p></div>
+            <div class="member-card"><h3>BASS</h3><p>공도원</p><p>김현서</p></div>
+            <div class="member-card"><h3>DRUM</h3><p>김예섬</p><p>박시은</p><p>이승하</p></div>
+          </div>
+          <div class="member-photo-space">MEMBER PHOTOS — TO BE ADDED</div>
+        </section>
+
+        <section id="archive" class="page-section">
+          <div class="section-heading"><span>04</span><h2>ARCHIVE</h2></div>
+          <div class="archive-list">
+            <article><div class="archive-date">2025.11.16</div><div><h3>11월 공연</h3><p>단체 사진 · 개인 사진 · 공연 기록</p><a href="#" class="archive-link">VIEW ARCHIVE ↗</a></div></article>
+            <article><div class="archive-date">2026.04.05</div><div><h3>홈커밍 공연</h3><p>단체 사진 · 개인 사진 · 공연 기록</p><a href="#" class="archive-link">VIEW ARCHIVE ↗</a></div></article>
+            <article><div class="archive-date">2026.05.??</div><div><h3>틴더 공연</h3><p>사진과 간단한 설명을 추가할 공간</p><a href="#" class="archive-link">VIEW ARCHIVE ↗</a></div></article>
+            <article><div class="archive-date">2026.05.30</div><div><h3>5월 공연</h3><p>사진과 간단한 설명을 추가할 공간</p><a href="#" class="archive-link">VIEW ARCHIVE ↗</a></div></article>
+            <article><div class="archive-date">2026</div><div><h3>활주로 공연</h3><p>사진과 간단한 설명을 추가할 공간</p><a href="#" class="archive-link">VIEW ARCHIVE ↗</a></div></article>
+            <article><div class="archive-date">2026.08.10</div><div><h3>여대 연합 공연</h3><p>사진과 간단한 설명을 추가할 공간</p><a href="#" class="archive-link">VIEW ARCHIVE ↗</a></div></article>
+            <article><div class="archive-date">2026.09.12</div><div><h3>클럽 ff 공연</h3><p>사진과 간단한 설명을 추가할 공간</p><a href="#" class="archive-link">VIEW ARCHIVE ↗</a></div></article>
+          </div>
+        </section>
+
+        <section id="goods" class="page-section">
+          <div class="section-heading"><span>05</span><h2>SETLIST &amp; GOODS</h2></div>
+          <div class="goods-layout">
+            <div class="setlist-paper"><div class="paper-label">SETLIST</div><p>COMING SOON</p><div class="blank-lines"></div></div>
+            <div class="goods-photo">GOODS PHOTO<br><small>SPACE FOR MERCH / POSTER / STICKER</small></div>
+          </div>
+        </section>
+
+        <section id="links" class="page-section">
+          <div class="section-heading"><span>06</span><h2>LINKS</h2></div>
+          <div class="link-cards">
+            <a href="#" target="_blank" rel="noopener">INSTAGRAM <span>↗</span></a>
+            <a href="#" target="_blank" rel="noopener">YOUTUBE <span>↗</span></a>
+          </div>
+          <p class="link-note">실제 인스타그램 / 유튜브 주소를 HTML에서 교체해 주세요.</p>
+        </section>
+
+        <footer>
+          <span>DESTINY © 2026</span>
+          <span>MADE OF MUSIC &amp; YOUTH</span>
+          <span>♪ ♫ ♪</span>
+        </footer>
+      </div>
+    </div>
+  </main>
+
+  <script src="script_v5.js"></script>
+</body>
+</html>
