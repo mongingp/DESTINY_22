@@ -130,4 +130,22 @@ body, button, input, textarea, select,
 .setlist-paper, .goods-photo,
 .link-note {
   font-family:"KIMWILDgag-Bold", sans-serif;
+.about-photo{
+  width:100%;
+  max-width:500px;
+  height:auto;
+  margin:18px auto 0;
+  border:1px solid #999;
+  display:block;
+.home-video{
+  display:flex;
+  justify-content:center;
+  margin-top:28px;
+  background:red;
+}
+.home-video video{
+  max-width:50px;
+  width:100%;
+  height:auto;
+  border:1px solid #999;
 }
