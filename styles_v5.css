@@ -27,7 +27,7 @@ button{cursor:pointer}
 .entry-sign{position:absolute;z-index:8;top:18px;left:50%;transform:translateX(-50%);width:min(820px,80%);background:#fff;border:1px solid #111;text-align:center;padding:9px 16px 12px;line-height:1}
 .destiny-blue{display:block;color:var(--blue);font-family:"Bowlby One SC",sans-serif;font-size:clamp(2.6rem,6vw,5rem);letter-spacing:.04em}
 .sign-sub{display:block;font-family:"KIMWILDgag-Bold",sans-serif;font-size:clamp(1rem,2.1vw,1.65rem);margin-top:7px}
-.room-backdrop{position:absolute;inset:0;background:linear-gradient(var(--sky) 0 67%,#fff 67%);overflow:hidden}
+.room-backdrop{position:absolute;inset:0;background:#fff;overflow:hidden}
 .floor-line{position:absolute;left:0;right:0;bottom:13%;border-top:1px dashed #777}
 .amp{position:absolute;background:#ddd;border:2px solid #222;width:110px;height:95px;bottom:15%;box-shadow:inset 0 0 0 8px #eee}
 .amp-a{left:10%}.amp-b{right:10%}
@@ -46,11 +46,18 @@ button{cursor:pointer}
 .instrument-mic:before{content:"";position:absolute;left:48px;top:0;width:38px;height:65px;border-radius:50%;border:6px solid #222;background:#ddd}
 .instrument-mic i{position:absolute;left:65px;top:60px;width:5px;height:190px;background:#222}.instrument-mic b{position:absolute;left:18px;bottom:0;width:95px;height:4px;background:#222;transform:rotate(-7deg)}
 .gate{position:absolute;z-index:6;inset:0;display:flex;transition:transform 1.2s cubic-bezier(.7,0,.2,1)}
-.gate-panel{height:100%;width:50%;background:repeating-linear-gradient(90deg,#d9f4f5 0 24px,#c5daf6 24px 30px);border-bottom:1px solid #222;position:relative}
-.gate-panel:before,.gate-panel:after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent 0 22px,rgba(59,53,252,.55) 23px 26px,transparent 27px 45px);opacity:.9}
-.gate-panel:after{transform:scaleX(-1)}
+.gate-panel{
+  height:100%;
+  width:50%;
+  position:relative;
+  background:
+    repeating-linear-gradient(90deg, rgba(255,255,255,.8) 0 10px, transparent 2px 90px),
+    linear-gradient(180deg, rgba(197,218,246,.4), rgba(237,244,252,.2));
+  border-bottom:1px solid #222;
+  box-shadow: inset 0 0 60px rgba(255,255,255,.5);
+}
 .left-panel{border-right:1px solid #222}.right-panel{border-left:1px solid #222}
-.gate-center{position:absolute;left:50%;top:0;bottom:0;width:6px;background:#3b35fc;transform:translateX(-50%);z-index:2}
+.gate-center{position:absolute;left:50%;top:0;bottom:0;width:2px;background:rgba(59,53,252,.6);transform:translateX(-50%);z-index:2}
 .lock-button{position:absolute;z-index:5;left:50%;top:51%;transform:translate(-50%,-50%);border:1px solid #111;background:#fff;color:#111;padding:10px 14px;box-shadow:4px 4px 0 var(--blue);display:flex;gap:9px;align-items:center;font-size:11px}
 .lock-icon{color:var(--blue);font-size:12px}
 .gate.open .left-panel{transform:translateX(-102%);transition:transform 1.2s cubic-bezier(.7,0,.2,1)}
@@ -130,6 +137,7 @@ body, button, input, textarea, select,
 .setlist-paper, .goods-photo,
 .link-note {
   font-family:"KIMWILDgag-Bold", sans-serif;
+}
 .about-photo{
   width:100%;
   max-width:500px;
@@ -137,15 +145,137 @@ body, button, input, textarea, select,
   margin:18px auto 0;
   border:1px solid #999;
   display:block;
+}
 .home-video{
   display:flex;
   justify-content:center;
   margin-top:28px;
-  background:red;
 }
 .home-video video{
-  max-width:50px;
+  max-width:480px;
   width:100%;
   height:auto;
   border:1px solid #999;
+}
+.club-logo{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  width:400px;
+  height:auto;
+  z-index:2;
+}
+.member-carousel{
+  position:relative;
+  height:480px;
+  margin-top:26px;
+}
+.role-card{
+  position:absolute;
+  top:0;
+  left:50%;
+  width:280px;
+  height:440px;
+  background:var(--sky);
+  border:1px solid #111;
+  cursor:pointer;
+  opacity:0;
+  filter:grayscale(1);
+  z-index:2;
+  transform:translate(-50%,0) scale(.3);
+  transition:transform .8s cubic-bezier(.34,1.2,.4,1), opacity .5s ease, filter .4s ease, background .4s ease;
+}
+.member-carousel.revealed .role-card{
+  opacity:1;
+  transform:translate(calc(-50% + var(--idle-x)), 0) scale(.92);
+}
+.role-card-inner{
+  height:100%;
+  padding:22px 16px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+.member-carousel.revealed .role-card:not(.slot-center):not(.slot-left):not(.slot-right):not(.slot-back) .role-card-inner{
+  animation:cardFloatY 3.4s ease-in-out infinite;
+}
+.role-card:nth-child(1) .role-card-inner{animation-delay:0s}
+.role-card:nth-child(2) .role-card-inner{animation-delay:.2s}
+.role-card:nth-child(3) .role-card-inner{animation-delay:.4s}
+.role-card:nth-child(4) .role-card-inner{animation-delay:.6s}
+@keyframes cardFloatY{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-10px)}
+}
+.role-card:hover{filter:grayscale(.25)}
+
+.role-label{
+  font-family:"Bowlby One SC",sans-serif;
+  font-size:26px;
+  color:var(--blue);
+  letter-spacing:.06em;
+  margin-bottom:12px;
+}
+.role-panel{display:none}
+
+/* --- 클릭해서 가운데로 나온 카드 --- */
+.role-card.slot-center{
+  transform:translate(-50%,0) scale(1.15);
+  background:#fff;
+  filter:none;
+  opacity:1;
+  z-index:5;
+  box-shadow:var(--shadow);
+  overflow-y:auto;
+}
+.role-card.slot-center .role-panel{display:block}
+.role-card.slot-left{
+  transform:translate(calc(-50% - 300px),0) scale(.62);
+  opacity:.45;
+  z-index:2;
+}
+.role-card.slot-right{
+  transform:translate(calc(-50% + 300px),0) scale(.62);
+  opacity:.45;
+  z-index:2;
+}
+.role-card.slot-back{
+  transform:translate(-50%,0) scale(.4);
+  opacity:.2;
+  z-index:1;
+}
+
+.role-desc{
+  font-family:"KIMWILDgag-Bold",sans-serif;
+  font-size:12px;
+  color:#777;
+  text-align:center;
+  margin:0 0 14px;
+}
+.role-roster{display:flex;flex-wrap:wrap;gap:14px;justify-content:center}
+.role-member{width:78px;text-align:center;font-family:"KIMWILDgag-Bold",sans-serif;font-size:12px}
+.role-member p:before{content:"- "}
+.role-photo{
+  width:70px;height:70px;
+  border-radius:50%;
+  border:1.5px dashed #999;
+  background:var(--mint);
+  margin:0 auto 6px;
+}
+
+@media(max-width:760px){
+  .member-carousel{height:auto}
+  .role-card{
+    position:static;
+    width:100%;
+    height:auto;
+    transform:none !important;
+    opacity:1 !important;
+    filter:none !important;
+    margin-bottom:10px;
+  }
+  .role-card-inner{animation:none !important}
+  .role-card .role-panel{display:none}
+  .role-card.slot-center .role-panel{display:block}
 }

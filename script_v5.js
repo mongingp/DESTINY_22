@@ -5,13 +5,11 @@
   const site = $('site');
   const gate = $('gate');
   const unlockBtn = $('unlockBtn');
-  const joinButton = $('joinButton');
   const notesLayer = $('notes-layer');
   const navLinks = [...document.querySelectorAll('.nav-link')];
   const sections = [...document.querySelectorAll('.page-section')];
 
   let gateOpened = false;
-  let entering = false;
 
   function showerNotes(x, y, count = 8) {
     const glyphs = ['♪', '♫', '♩', '♬'];
@@ -31,14 +29,35 @@
     }
   }
 
-  function showPage(id) {
+   function showPage(id) {
     const target = document.getElementById(id) || document.getElementById('home');
     sections.forEach(section => section.classList.toggle('page-active', section === target));
     navLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === `#${target.id}`));
     window.scrollTo(0, 0);
+
+    if (target.id === 'member') {
+      const carousel = document.querySelector('.member-carousel');
+      if (carousel) {
+        carousel.classList.remove('revealed');
+        // 살짝 딜레이를 줘서 매번 Member 탭 들어갈 때마다 펼쳐지는 연출이 재생되게 함
+        requestAnimationFrame(() => {
+          setTimeout(() => carousel.classList.add('revealed'), 50);
+        });
+      }
+    }
   }
 
-  // STEP 1: click the lock -> physically open the gate.
+  function enterHome() {
+    site.classList.add('visible');
+    site.setAttribute('aria-hidden', 'false');
+    entry.setAttribute('aria-hidden', 'true');
+    entry.style.display = 'none';
+    document.body.classList.add('inside');
+    showPage('home');
+    history.replaceState(null, '', '#home');
+  }
+
+  // 자물쇠 클릭 -> 문 열림 -> 로고 잠깐 보이고 -> 자동으로 Home 진입
   unlockBtn.addEventListener('click', (event) => {
     event.preventDefault();
     event.stopPropagation();
@@ -47,44 +66,16 @@
     showerNotes(event.clientX, event.clientY, 10);
     gate.classList.add('open');
 
-    // STEP 2: once the doors have moved aside, reveal the blinking JOIN button.
     window.setTimeout(() => {
-      joinButton.classList.add('ready');
-      joinButton.focus({preventScroll: true});
-      showerNotes(window.innerWidth / 2, window.innerHeight * .52, 10);
-    }, 1100);
+      showerNotes(window.innerWidth / 2, window.innerHeight * .52, 14);
+    }, 700);
+
+    window.setTimeout(() => {
+      enterHome();
+    }, 1500);
   });
-
-  // STEP 3: click JOIN US -> hide entry and show Home.
-  function enterHome(event) {
-    event.preventDefault();
-    event.stopPropagation();
-    if (entering || !joinButton.classList.contains('ready')) return;
-    entering = true;
-    showerNotes(event.clientX || window.innerWidth / 2, event.clientY || window.innerHeight / 2, 18);
-
-    joinButton.classList.remove('ready');
-    site.classList.add('visible');
-    site.setAttribute('aria-hidden', 'false');
-    entry.setAttribute('aria-hidden', 'true');
-    entry.style.display = 'none';
-    document.body.classList.add('inside');
-    showPage('home');
-    history.replaceState(null, '', '#home');
-
-    // Unlock the state after the visual transition is complete.
-    window.setTimeout(() => { entering = false; }, 700);
-  }
-
-  joinButton.addEventListener('click', enterHome);
-  joinButton.addEventListener('pointerup', enterHome);
-  joinButton.addEventListener('keydown', (event) => {
-    if (event.key === 'Enter' || event.key === ' ') enterHome(event);
-  });
-
 
   // --- Ambient interaction notes ---
-  // Notes follow the user's interaction, not just explicit button clicks.
   let lastAmbient = 0;
 
   function ambientNotes(x, y, count = 3) {
@@ -98,12 +89,10 @@
     );
   }
 
-  // Click / tap / pen interaction anywhere.
   window.addEventListener('pointerdown', (event) => {
     ambientNotes(event.clientX, event.clientY, 4);
   }, {passive:true});
 
-  // Wheel / trackpad scrolling.
   window.addEventListener('wheel', (event) => {
     if (!site.classList.contains('visible')) return;
     ambientNotes(
@@ -113,14 +102,12 @@
     );
   }, {passive:true});
 
-  // Touch scrolling on phones/tablets.
   window.addEventListener('touchmove', (event) => {
     if (!site.classList.contains('visible')) return;
     const touch = event.touches[0];
     if (touch) ambientNotes(touch.clientX, touch.clientY, 2);
   }, {passive:true});
 
-  // Keyboard scrolling / navigation.
   window.addEventListener('keydown', (event) => {
     if (!site.classList.contains('visible')) return;
     if (['ArrowDown','ArrowUp','PageDown','PageUp','Home','End',' '].includes(event.key)) {
@@ -128,7 +115,6 @@
     }
   });
 
-  // A restrained pointer trail.
   let lastPointerTrail = 0;
   window.addEventListener('pointermove', (event) => {
     if (!site.classList.contains('visible')) return;
@@ -138,8 +124,7 @@
     ambientNotes(event.clientX, event.clientY, 1);
   }, {passive:true});
 
-  // Page navigation is click-only. No IntersectionObserver is used.
-  navLinks.forEach(link => {
+    navLinks.forEach(link => {
     link.addEventListener('click', (event) => {
       event.preventDefault();
       const id = link.getAttribute('href').slice(1);
@@ -149,17 +134,39 @@
     });
   });
 
-  // Falling-note interaction for meaningful clicks inside the site.
+  const memberCarousel = document.querySelector('.member-carousel');
+  const roleCards = [...document.querySelectorAll('.role-card')];
+  let activeRoleIndex = null;
+
+  function layoutRoleCards(){
+    roleCards.forEach((card, i) => {
+      card.classList.remove('slot-center','slot-left','slot-right','slot-back');
+      if (activeRoleIndex === null) return;
+      const diff = (i - activeRoleIndex + roleCards.length) % roleCards.length;
+      if (diff === 0) card.classList.add('slot-center');
+      else if (diff === 1) card.classList.add('slot-right');
+      else if (diff === roleCards.length - 1) card.classList.add('slot-left');
+      else card.classList.add('slot-back');
+    });
+  }
+
+  roleCards.forEach((card, i) => {
+    card.addEventListener('click', (event) => {
+      activeRoleIndex = (activeRoleIndex === i) ? null : i;
+      layoutRoleCards();
+      ambientNotes(event.clientX, event.clientY, 6);
+    });
+  });
+
   document.addEventListener('click', (event) => {
     if (!site.classList.contains('visible')) return;
-    if (event.target.closest('.nav-link, .join-button')) return;
+    if (event.target.closest('.nav-link')) return;
     if (event.target.closest('a[href="#"]')) event.preventDefault();
     if (event.target.closest('button, .archive-link, .link-cards a, .photo-placeholder, .member-card, .goods-photo')) {
       ambientNotes(event.clientX, event.clientY, 6);
     }
   });
 
-  // Start at Home regardless of a stale hash from a previous visit.
   showPage('home');
   const visitorNumber = $('visitorNumber');
   if (visitorNumber) visitorNumber.textContent = String(23000 + Math.floor(Math.random() * 700)).padStart(6, '0');
