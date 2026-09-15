@@ -100,7 +100,74 @@ nav{display:flex;flex-direction:column;gap:6px}nav a{color:#222;text-decoration:
 .blank-lines{height:130px;margin-top:18px;background:repeating-linear-gradient(to bottom,transparent 0 29px,#aeb9c6 30px 31px)}
 .member-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.member-card{padding:16px;background:var(--mint);box-shadow:3px 3px 0 #111}.member-card:nth-child(even){background:var(--sky)}.member-card h3{font-family:"Silkscreen";font-size:12px;color:var(--blue);border-bottom:1px solid #111;padding-bottom:8px}.member-card p{font-family:"KIMWILDgag-Bold",sans-serif;margin:9px 0}.member-photo-space{margin-top:12px;border:1px dashed #777;min-height:180px;display:grid;place-items:center;font-size:10px;color:#777;background:#fff}
 .archive-list{padding:4px}.archive-list article{display:grid;grid-template-columns:130px 1fr;gap:18px;padding:18px 15px;border-bottom:1px dotted #888}.archive-list article:last-child{border-bottom:0}.archive-date{font-family:"Silkscreen";font-size:10px;color:var(--blue)}.archive-list h3{font-family:"KIMWILDgag-Bold",sans-serif;margin:0 0 7px;font-size:20px}.archive-list p{margin:0 0 10px;font-size:10px;color:#666}.archive-link{font-size:9px;color:#111;text-decoration:underline}
-.goods-layout{display:grid;grid-template-columns:1fr 1fr;gap:12px}.setlist-paper{padding:22px;background:var(--mint)}.setlist-paper>p{font-family:"Silkscreen";font-size:16px;color:var(--blue)}.goods-photo{min-height:330px;display:grid;place-items:center;text-align:center;background:var(--pale);font-family:"Silkscreen";color:#111}
+.festival-tabs{display:flex;gap:8px;margin-bottom:14px}
+.festival-tab{
+  border:1px solid #111;
+  background:#fff;
+  padding:9px 18px;
+  font-family:"Silkscreen",monospace;
+  font-size:11px;
+  letter-spacing:.06em;
+  cursor:pointer;
+}
+.festival-tab.active{background:var(--blue);color:#fff}
+.festival-panel{display:none}
+.festival-panel.active{display:block}
+
+.setlist-block{
+  display:flex;
+  align-items:center;
+  gap:24px;
+  padding:28px;
+  border:1px solid #999;
+  background:#fff;
+  flex-wrap:wrap;
+}
+.setlist-text{flex:1;min-width:160px}
+.setlist-text p{font-family:"Silkscreen";font-size:16px;color:var(--blue);margin-top:14px}
+.setlist-photo{flex:1.4;min-width:220px}
+.setlist-photo img{width:100%;max-height:420px;object-fit:contain;border:1px solid #999;display:block}
+
+.booth-item{
+  border:1px solid #999;
+  background:#fff;
+  padding:20px;
+  margin-bottom:14px;
+}
+.booth-label{
+  font-family:"Bowlby One SC",sans-serif;
+  font-size:18px;
+  color:var(--blue);
+  margin:0 0 12px;
+}
+.booth-photos{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(180px,1fr));
+  gap:12px;
+}
+.booth-photo-box{
+  aspect-ratio:4/3;
+  border:1px dashed #999;
+  background:var(--mint);
+  overflow:hidden;
+}
+.booth-photo-box img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  display:block;
+}
+.booth-photo-item{display:flex;flex-direction:column}
+.booth-caption{
+  font-family:"KIMWILDgag-Bold",sans-serif;
+  font-size:12px;
+  color:#555;
+  line-height:1.5;
+  margin:8px 0 0;
+}
+@media(max-width:600px){
+  .setlist-block{flex-direction:column}
+}
 .link-cards{display:grid;grid-template-columns:1fr 1fr}.link-cards a{padding:25px;text-decoration:none;color:#111;font-family:"Silkscreen";font-size:18px;border-right:1px solid #111}.link-cards a:last-child{border-right:0}.link-cards a:hover{background:var(--blue);color:#fff}.link-cards span{float:right}.link-note{font-size:9px;color:#777}
 footer{display:flex;justify-content:space-between;border-top:1px solid #111;padding:13px 0 40px;font-size:9px;color:#666}
 .note{position:fixed;z-index:1000;pointer-events:none;font-size:25px;color:var(--blue);animation:noteFall 1.35s cubic-bezier(.2,.55,.35,1) forwards;transform:translate(-50%,-50%) rotate(0deg)}
@@ -166,116 +233,177 @@ body, button, input, textarea, select,
   height:auto;
   z-index:2;
 }
-.member-carousel{
-  position:relative;
-  height:480px;
-  margin-top:26px;
+.member-carousel{margin-top:26px}
+.member-track{
+  display:flex;
+  gap:16px;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  padding:10px 10px 22px;
+  cursor:grab;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+  user-select:none;
+  transition:padding .4s ease;
 }
+.member-track::-webkit-scrollbar{display:none}
+.member-track.dragging{cursor:grabbing;scroll-snap-type:none}
+
 .role-card{
-  position:absolute;
-  top:0;
-  left:50%;
-  width:280px;
-  height:440px;
+  flex:0 0 190px;
+  scroll-snap-align:center;
   background:var(--sky);
   border:1px solid #111;
   cursor:pointer;
-  opacity:0;
-  filter:grayscale(1);
-  z-index:2;
-  transform:translate(-50%,0) scale(.3);
-  transition:transform .8s cubic-bezier(.34,1.2,.4,1), opacity .5s ease, filter .4s ease, background .4s ease;
+  opacity:.55;
+  transform:scale(.92);
+  transition:flex-basis .45s cubic-bezier(.4,0,.2,1), opacity .35s ease, transform .35s ease, background .35s ease;
 }
-.member-carousel.revealed .role-card{
+.role-card:nth-child(2){background:var(--mint)}
+.role-card:nth-child(3){background:var(--pale)}
+.role-card:nth-child(4){background:var(--sky)}
+
+.role-card.expanded{
+  flex-basis:min(560px, 82vw);
   opacity:1;
-  transform:translate(calc(-50% + var(--idle-x)), 0) scale(.92);
+  transform:scale(1);
+  background:#fff;
+  box-shadow:var(--shadow);
 }
+
 .role-card-inner{
-  height:100%;
   padding:22px 16px;
   display:flex;
   flex-direction:column;
   align-items:center;
 }
-.member-carousel.revealed .role-card:not(.slot-center):not(.slot-left):not(.slot-right):not(.slot-back) .role-card-inner{
-  animation:cardFloatY 3.4s ease-in-out infinite;
-}
-.role-card:nth-child(1) .role-card-inner{animation-delay:0s}
-.role-card:nth-child(2) .role-card-inner{animation-delay:.2s}
-.role-card:nth-child(3) .role-card-inner{animation-delay:.4s}
-.role-card:nth-child(4) .role-card-inner{animation-delay:.6s}
-@keyframes cardFloatY{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-10px)}
-}
-.role-card:hover{filter:grayscale(.25)}
-
 .role-label{
   font-family:"Bowlby One SC",sans-serif;
-  font-size:26px;
+  font-size:22px;
   color:var(--blue);
   letter-spacing:.06em;
-  margin-bottom:12px;
 }
-.role-panel{display:none}
-
-/* --- 클릭해서 가운데로 나온 카드 --- */
-.role-card.slot-center{
-  transform:translate(-50%,0) scale(1.15);
-  background:#fff;
-  filter:none;
-  opacity:1;
-  z-index:5;
-  box-shadow:var(--shadow);
-  overflow-y:auto;
-}
-.role-card.slot-center .role-panel{display:block}
-.role-card.slot-left{
-  transform:translate(calc(-50% - 300px),0) scale(.62);
-  opacity:.45;
-  z-index:2;
-}
-.role-card.slot-right{
-  transform:translate(calc(-50% + 300px),0) scale(.62);
-  opacity:.45;
-  z-index:2;
-}
-.role-card.slot-back{
-  transform:translate(-50%,0) scale(.4);
-  opacity:.2;
-  z-index:1;
-}
-
 .role-desc{
   font-family:"KIMWILDgag-Bold",sans-serif;
   font-size:12px;
   color:#777;
   text-align:center;
-  margin:0 0 14px;
+  margin:10px 0 4px;
+  display:none;
 }
-.role-roster{display:flex;flex-wrap:wrap;gap:14px;justify-content:center}
-.role-member{width:78px;text-align:center;font-family:"KIMWILDgag-Bold",sans-serif;font-size:12px}
+.role-card.expanded .role-desc{display:block}
+
+.role-roster{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  justify-content:center;
+  margin-top:10px;
+}
+.role-member{width:64px;text-align:center;font-family:"KIMWILDgag-Bold",sans-serif;font-size:11px}
+.role-card.expanded .role-member{width:130px;font-size:14px}
 .role-member p:before{content:"- "}
+
 .role-photo{
-  width:70px;height:70px;
+  width:56px;height:56px;
   border-radius:50%;
   border:1.5px dashed #999;
   background:var(--mint);
   margin:0 auto 6px;
+  transition:width .4s ease, height .4s ease;
+}
+.role-photo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:50%;
+}
+.role-card.expanded .role-photo{
+  width:130px;height:130px;
+  margin:0 auto 10px;
 }
 
-@media(max-width:760px){
-  .member-carousel{height:auto}
-  .role-card{
-    position:static;
-    width:100%;
-    height:auto;
-    transform:none !important;
-    opacity:1 !important;
-    filter:none !important;
-    margin-bottom:10px;
-  }
-  .role-card-inner{animation:none !important}
-  .role-card .role-panel{display:none}
-  .role-card.slot-center .role-panel{display:block}
+.carousel-dots{display:flex;justify-content:center;gap:8px;margin-top:4px}
+.carousel-dot{
+  width:8px;height:8px;
+  border-radius:50%;
+  background:var(--pale);
+  border:none;
+  cursor:pointer;
+  padding:0;
+}
+.carousel-dot.active{background:var(--blue)}
+
+@media(max-width:600px){
+  .role-card{flex-basis:60vw}
+  .role-card.expanded{flex-basis:92vw}
+}
+.apply-box{border:1px solid #111;background:#fff;padding:44px 24px;display:flex;justify-content:center;margin-top:8px}
+.apply-content{display:flex;flex-direction:column;align-items:center;gap:12px;width:100%;max-width:300px}
+.apply-label{font-family:"DM Mono",monospace;font-size:11px;color:#777;letter-spacing:.05em}
+.apply-input{
+  width:100%;
+  text-align:center;
+  font-family:"Bowlby One SC",sans-serif;
+  font-size:30px;
+  padding:14px;
+  border:1px solid #111;
+  color:var(--blue);
+}
+.apply-input:focus{outline:2px solid var(--blue)}
+.apply-submit{
+  width:100%;
+  padding:13px;
+  border:1px solid #111;
+  background:var(--blue);
+  color:#fff;
+  font-family:"Silkscreen",monospace;
+  font-size:13px;
+  letter-spacing:.08em;
+  cursor:pointer;
+}
+.apply-submit:hover{background:#2b27c9}
+.apply-error{font-family:"DM Mono",monospace;font-size:11px;color:#e0303f;min-height:14px;margin:0}
+.apply-done{font-family:"Silkscreen",monospace;font-size:13px;color:var(--blue);letter-spacing:.06em}
+.apply-number{font-family:"Bowlby One SC",sans-serif;font-size:46px;color:var(--ink);-webkit-text-stroke:1px #111}
+
+.rain-note{
+  position:fixed;
+  top:-30px;
+  z-index:1000;
+  pointer-events:none;
+  font-size:22px;
+  color:var(--blue);
+  animation:rainFall 2.2s linear forwards;
+}
+.rain-note:nth-child(2n){color:#111}
+.rain-note:nth-child(3n){color:#7aa8dc}
+@keyframes rainFall{
+  0%{transform:translate(0,0);opacity:1}
+  100%{transform:translate(var(--rain-drift,0px), 110vh);opacity:0}
+}
+.photo-lightbox{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.85);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:2000;
+  padding:24px;
+  cursor:zoom-out;
+}
+.photo-lightbox.open{display:flex}
+.photo-lightbox img{
+  max-width:90vw;
+  max-height:90vh;
+  border:2px solid #fff;
+  object-fit:contain;
+}
+.role-photo img{cursor:zoom-in}
+.booth-photo-box img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  display:block;
 }
